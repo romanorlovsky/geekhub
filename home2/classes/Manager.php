@@ -1,5 +1,5 @@
 <?php
-class Manager extends EmployeeAbstract implements FileInterface
+class Manager extends EmployeeAbstract implements XMLInterface, TXTInterface
 {
     private $numberOfProjects = 0;
 
@@ -22,12 +22,22 @@ class Manager extends EmployeeAbstract implements FileInterface
         echo '--------------------------------------<br><br>';
     }
 
-    public function readFile()
+    public function readXMLFile()
     {
 
     }
 
-    public function writeFile()
+    public function writeXMLFile()
+    {
+
+    }
+
+    public function readTXTFile()
+    {
+
+    }
+
+    public function writeTXTFile()
     {
 
     }

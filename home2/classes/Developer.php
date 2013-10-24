@@ -1,5 +1,5 @@
 <?php
-class Developer extends EmployeeAbstract implements FileInterface
+class Developer extends EmployeeAbstract implements XMLInterface, TXTInterface
 {
     private $currentProject = '';
     private $technologies = '';
@@ -25,12 +25,22 @@ class Developer extends EmployeeAbstract implements FileInterface
         echo '--------------------------------------<br><br>';
     }
 
-    public function readFile()
+    public function readXMLFile()
     {
 
     }
 
-    public function writeFile()
+    public function writeXMLFile()
+    {
+
+    }
+
+    public function readTXTFile()
+    {
+
+    }
+
+    public function writeTXTFile()
     {
 
     }
