@@ -1,0 +1,7 @@
+Full name: Roman Orlovsky
+Id: 1
+Pay: 120
+Pay rise: 60
+Pay with premium: 12060
+Current project: portfolio
+Technologies: php
