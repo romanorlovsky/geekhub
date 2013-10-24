@@ -1,5 +1,5 @@
 <?php
-abstract class Employee
+abstract class EmployeeAbstract
 {
     private $fullName = '';
     private $id = 0;

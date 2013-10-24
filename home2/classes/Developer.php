@@ -1,5 +1,5 @@
 <?php
-class Developer extends Employee
+class Developer extends EmployeeAbstract implements FileInterface
 {
     private $currentProject = '';
     private $technologies = '';
@@ -22,20 +22,16 @@ class Developer extends Employee
         parent::displayInfo();
         echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Current project: ', $this->currentProject, '<br>';
         echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Technologies: ', $this->technologies, '<br>';
-        echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'XML string: ', htmlspecialchars($this->genXML()), '<br>';
         echo '--------------------------------------<br><br>';
     }
 
-    function genXML()
+    public function readFile()
     {
-        return
-            <<<XMLFRAGMENT
-    <developer>
-        <name>{$this->getFullName()}</name>
-        <id>{$this->getId()}</id>
-        <pay>{$this->getPay()}</pay>
-        <bonus>{$this->getBonus()}</bonus>
-    </developer>
-XMLFRAGMENT;
+
+    }
+
+    public function writeFile()
+    {
+
     }
 }

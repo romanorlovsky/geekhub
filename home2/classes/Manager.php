@@ -1,5 +1,5 @@
 <?php
-class Manager extends Employee implements XML
+class Manager extends EmployeeAbstract implements FileInterface
 {
     private $numberOfProjects = 0;
 
@@ -19,20 +19,16 @@ class Manager extends Employee implements XML
     {
         parent::displayInfo();
         echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Number of projects: ', $this->numberOfProjects, '<br>';
-        echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'XML string: ', htmlspecialchars($this->genXML()), '<br>';
         echo '--------------------------------------<br><br>';
     }
 
-    function genXML()
+    public function readFile()
     {
-        return
-            <<<XMLFRAGMENT
-    <manager>
-        <name>{$this->getFullName()}</name>
-        <id>{$this->getId()}</id>
-        <pay>{$this->getPay()}</pay>
-        <bonus>{$this->getBonus()}</bonus>
-    </manager>
-XMLFRAGMENT;
+
+    }
+
+    public function writeFile()
+    {
+
     }
 }
