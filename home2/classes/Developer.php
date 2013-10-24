@@ -1,24 +1,27 @@
 <?php
-class Manager extends Employee implements XML
+class Developer extends Employee
 {
-    private $numberOfProjects = 0;
+    private $currentProject = '';
+    private $technologies = '';
 
-    public function __construct($fullName, $id, $pay, $numberOfProjects)
+    public function __construct($fullName, $id, $pay, $currentProject, $technologies)
     {
         parent::__construct($fullName, $id, $pay);
-        $this->setType('Manager');
-        $this->numberOfProjects = $numberOfProjects;
+        $this->setType('Developer');
+        $this->currentProject = $currentProject;
+        $this->technologies = $technologies;
     }
 
     public function giveBonus($amount)
     {
-        $this->setBonus($amount + 10);
+        $this->setBonus($amount + 50);
     }
 
     public function displayInfo()
     {
         parent::displayInfo();
-        echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Number of projects: ', $this->numberOfProjects, '<br>';
+        echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Current project: ', $this->currentProject, '<br>';
+        echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Technologies: ', $this->technologies, '<br>';
         echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'XML string: ', htmlspecialchars($this->genXML()), '<br>';
         echo '--------------------------------------<br><br>';
     }
@@ -27,12 +30,12 @@ class Manager extends Employee implements XML
     {
         return
             <<<XMLFRAGMENT
-    <manager>
+    <developer>
         <name>{$this->getFullName()}</name>
         <id>{$this->getId()}</id>
         <pay>{$this->getPay()}</pay>
         <bonus>{$this->getBonus()}</bonus>
-    </manager>
+    </developer>
 XMLFRAGMENT;
     }
 }

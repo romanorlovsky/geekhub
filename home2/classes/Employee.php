@@ -5,6 +5,7 @@ abstract class Employee
     private $id = 0;
     private $pay = 0;
     private $bonus = 0;
+    private $type = '';
 
     public function __construct($fullName, $id, $pay)
     {
@@ -13,17 +14,46 @@ abstract class Employee
         $this->pay = $pay;
     }
 
-    public function giveBonus($bonus)
+    abstract protected function giveBonus($amount);
+
+    public function displayInfo()
+    {
+        echo '--------------------------------------<br>';
+        echo $this->type, ':<br>';
+        echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Full name: ', $this->fullName, '<br>';
+        echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Id: ', $this->id, '<br>';
+        echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Pay: ', $this->pay, '<br>';
+        echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Pay rise: ', $this->bonus, '<br>';
+        echo '&nbsp;&nbsp;&nbsp;&nbsp;', 'Pay with premium: ', $this->pay + $this->bonus, '<br>';
+    }
+
+    public function getFullName()
+    {
+        return $this->fullName;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getPay()
+    {
+        return $this->pay;
+    }
+
+    protected function setBonus($bonus)
     {
         $this->bonus = $bonus;
     }
 
-    public function displayInfo()
+    public function getBonus()
     {
-        echo "Full name: ", $this->fullName, "\n";
-        echo "Id: ", $this->id, "\n";
-        echo "Pay: ", $this->pay, "\n";
-        echo "Pay rise: ", $this->bonus, "\n";
-        echo "Pay wth premium: ", $this->pay + $this->bonus, "\n";
+        return $this->bonus;
+    }
+
+    protected function setType($type)
+    {
+        $this->type = $type;
     }
 }
