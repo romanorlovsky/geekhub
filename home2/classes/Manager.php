@@ -1,5 +1,5 @@
 <?php
-class Manager extends EmployeeAbstract implements XMLInterface, TXTInterface
+class Manager extends AbstractEmployee implements XMLInterface, TXTInterface
 {
     private $numberOfProjects = 0;
     private $xmlFile = '';

@@ -1,5 +1,5 @@
 <?php
-class Developer extends EmployeeAbstract implements XMLInterface, TXTInterface
+class Developer extends AbstractEmployee implements XMLInterface, TXTInterface
 {
     private $currentProject = '';
     private $technologies = '';
