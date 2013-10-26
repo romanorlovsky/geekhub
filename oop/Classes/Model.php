@@ -15,8 +15,8 @@ abstract class Model
     {
         if (!file_exists($this->dbFile)) return null;
 
-        $xml = new XMLReader();
-        $xml->xml($this->dbFile);
+        $xml = new \XMLReader();
+        $xml->xml(file_get_contents($this->dbFile));
 
         return $xml;
     }

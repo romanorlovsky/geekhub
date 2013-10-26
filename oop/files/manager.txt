@@ -1,6 +1,0 @@
-Full name: Sergiy Bevz
-Id: 1
-Pay: 200
-Pay rise: 30
-Pay with premium: 230
-Number of projects: 3

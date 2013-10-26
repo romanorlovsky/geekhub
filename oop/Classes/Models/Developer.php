@@ -19,7 +19,7 @@ class Developer extends Model
         while ($xml->name === 'developer') {
 
             if ($xml->getAttribute("id") == $id) {
-                $node = new SimpleXMLElement($xml->readOuterXML());
+                $node = new \SimpleXMLElement($xml->readOuterXML());
                 $data = array(
                     'id' => $node->id,
                     'name' => $node->name,
@@ -31,7 +31,7 @@ class Developer extends Model
                 break;
             }
 
-            $xml->next('product');
+            $xml->next('developer');
         }
 
         return $data;
@@ -45,17 +45,17 @@ class Developer extends Model
 
         if (!$xml) return $data;
 
-        while ($xml->read() && $xml->name !== 'developer') ;
+        while ($xml->read() && $xml->name !== 'developer');
 
         while ($xml->name === 'developer') {
 
-            $node = new SimpleXMLElement($xml->readOuterXML());
+            $node = new \SimpleXMLElement($xml->readOuterXML());
             $data [] = array(
                 'id' => $node->id,
                 'name' => $node->name
             );
 
-            $xml->next('product');
+            $xml->next('developer');
         }
 
         return $data;

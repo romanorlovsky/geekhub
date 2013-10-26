@@ -16,10 +16,6 @@ class Developer extends Controller
             'list' => $model->loadAllModels()
         );
 
-        echo '<pre>';
-        print_r($data);
-        echo '</pre>';
-
         $this->render('index', $data);
     }
 }

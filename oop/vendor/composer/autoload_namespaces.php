@@ -9,5 +9,5 @@ return array(
     'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
     'Classes\\Model\\' => array($baseDir . '/Classes/Model'),
     'Classes\\Controller\\' => array($baseDir . '/Classes/Controller'),
-    'Classes\\' => array($baseDir . ''),
+    'Classes\\' => array($baseDir),
 );

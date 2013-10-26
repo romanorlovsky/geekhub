@@ -9,7 +9,12 @@ class Manager extends Controller
 {
     public function actionIndex()
     {
-        $data = array('title' => 'Developer');
+        $model = new \Classes\Models\Manager($this->object);
+
+        $data = array(
+            'title' => 'Manager',
+            'list' => $model->loadAllModels()
+        );
 
         $this->render('index', $data);
     }

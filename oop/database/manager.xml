@@ -1,2 +1,2 @@
 <?xml version="1.0"?>
-<manager><id>1</id><name>Sergiy Bevz</name><pay>200</pay><bonus>30</bonus><projects>3</projects></manager>
+<managers><manager id="1"><id>1</id><name>Sergiy Bevz</name><pay>200</pay><bonus>30</bonus><projects>3</projects></manager></managers>
