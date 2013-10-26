@@ -1,0 +1,12 @@
+{
+    "autoload": {
+        "psr-0": {
+            "Classes\\": "",
+            "Classes\\Controller\\": "Classes/Controller/",
+            "Classes\\Model\\": "Classes/Model/"
+        }
+    },
+    "require": {
+        "symfony/http-foundation": "2.2.*@dev"
+    }
+}
