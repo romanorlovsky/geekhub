@@ -5,8 +5,8 @@
             <?php foreach ($view_list as $item): ?>
                 <li>
                     <span><?= $item['name']; ?></span>
-                    <a href="/index.php?r=<?= $view_controller ?>/edit&id=<?= $item['id'] ?>">Edit</a>
-                    <a href="/index.php?r=<?= $view_controller ?>/remove&id=<?= $item['id'] ?>">Remove</a>
+                    <a href="/oop/index.php?r=<?= $view_controller ?>/edit&id=<?= $item['id'] ?>">Edit</a>
+                    <a href="/oop/index.php?r=<?= $view_controller ?>/remove&id=<?= $item['id'] ?>">Remove</a>
                 </li>
             <?php endforeach; ?>
         <?php endif; ?>

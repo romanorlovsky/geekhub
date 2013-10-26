@@ -18,4 +18,14 @@ class Developer extends Controller
 
         $this->render('index', $data);
     }
+
+    public function actionEdit()
+    {
+
+    }
+
+    public function actionRemove()
+    {
+
+    }
 }

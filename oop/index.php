@@ -4,8 +4,8 @@ include 'vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+/*error_reporting(E_ALL);
+ini_set('display_errors', 1);*/
 
 $request = Request::createFromGlobals();
 
