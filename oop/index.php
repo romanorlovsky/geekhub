@@ -4,21 +4,22 @@ include 'vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
 
-/*error_reporting(E_ALL);
-ini_set('display_errors', 1);*/
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $request = Request::createFromGlobals();
 
 $rule = $request->query->get('r');
 
-if (!$rule) {
-
+if ($rule) {
+    list($controller, $action) = explode('/', $rule, 2);
+} else {
+    $controller = 'home';
+    $action = 'index';
 }
 
-list($controller, $action) = explode('/', $rule, 2);
-
 if (!$controller) {
-    $controller = 'Error';
+    $controller = 'error';
 }
 
 if (!$action) {

@@ -6,8 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Symfony\\Component\\Validator\\' => array($vendorDir . '/symfony/validator'),
+    'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
+    'Symfony\\Component\\PropertyAccess\\' => array($vendorDir . '/symfony/property-access'),
     'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
     'Classes\\Model\\' => array($baseDir . '/Classes/Model'),
     'Classes\\Controller\\' => array($baseDir . '/Classes/Controller'),
-    'Classes\\' => array($baseDir),
+    'Classes\\' => array($baseDir . '/'),
 );
