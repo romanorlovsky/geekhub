@@ -1,4 +1,4 @@
-[<a href="/oop/index.php?r=manager/index">Back</a>]
+[<a href="/oop/index.php?r=<?= $view_controller ?>/index">Back</a>]
 <div class="<?= $view_controller ?>">
     <?php if (empty($view_edit)): ?>
         <h1>Not found</h1>
@@ -13,28 +13,6 @@
                 <p class="error"><?= $view_errors ?></p>
             <?php endif; ?>
         <?php endif; ?>
-        <form method="post" action="/oop/index.php?r=manager/update&id=<?= $view_edit['id']; ?>">
-            <input type="hidden" value="<?= $view_edit['id']; ?>" name="id">
-
-            <div>
-                <label for="name">Name: </label>
-                <input type="text" id="name" name="name" value="<?= $view_edit['name']; ?>">
-            </div>
-            <div>
-                <label for="pay">Pay: </label>
-                <input type="text" id="pay" name="pay" value="<?= $view_edit['pay']; ?>">
-            </div>
-            <div>
-                <label for="bonus">Bonus: </label>
-                <input type="text" id="bonus" name="bonus" value="<?= $view_edit['bonus']; ?>">
-            </div>
-            <div>
-                <label for="projects">Projects: </label>
-                <input type="text" id="projects" name="projects" value="<?= $view_edit['projects']; ?>">
-            </div>
-            <div>
-                <input type="submit" value="Save">
-            </div>
-        </form>
+        <?php $this->renderPartial('form', $view_edit); ?>
     <?php endif; ?>
 </div>

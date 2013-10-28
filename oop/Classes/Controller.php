@@ -25,11 +25,22 @@ abstract class Controller
 
         $view_controller = $this->object;
 
-        if (is_array($data)) extract($data, EXTR_PREFIX_ALL, 'view');
+        if (isset($data) && is_array($data)) extract($data, EXTR_PREFIX_ALL, 'view');
 
         include $layoutDir . 'header.php';
         if (file_exists($viewPath)) include $viewPath;
         include $layoutDir . 'footer.php';
+    }
+
+    protected function renderPartial($partial, $data)
+    {
+        $viewPath = realpath(dirname(__FILE__) . "/../views") . '/' . $this->object . '/_' . $partial . '.php';
+
+        $part_controller = $this->object;
+
+        if (isset($data) && is_array($data)) extract($data, EXTR_PREFIX_ALL, 'part');
+
+        if (file_exists($viewPath)) include $viewPath;
     }
 
     protected function redirect($action, $params)
