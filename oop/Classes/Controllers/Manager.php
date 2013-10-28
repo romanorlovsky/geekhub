@@ -19,7 +19,11 @@ class Manager extends Controller
 
         $request = Request::createFromGlobals();
 
-        if ($request->query->get('success')) $data['success'] = 1;
+        if ($request->query->get('update')) $data['update'] = 1;
+
+        $remove = $request->query->get('remove');
+
+        if (isset($remove)) $data['remove'] = $remove;
 
         $this->render('index', $data);
     }
@@ -40,14 +44,12 @@ class Manager extends Controller
 
             if ($result === true && $model->save($postData)) {
 
-                $response = new RedirectResponse('/oop/index.php?r=manager/index&success=1');
-                $response->send();
-                return;
+                $this->redirect('index', array('update' => 1));
 
             } else {
 
                 $data['edit'] = $request->request->all();
-                $data['error'] = $result;
+                $data['errors'] = $result;
 
             }
 
@@ -64,6 +66,14 @@ class Manager extends Controller
 
     public function actionRemove()
     {
+        $model = new \Classes\Models\Manager($this->object);
 
+        $request = Request::createFromGlobals();
+
+        $id = $request->query->get('id');
+
+        $remove = $model->remove($id);
+
+        $this->redirect('index', array('remove' => $remove));
     }
 }

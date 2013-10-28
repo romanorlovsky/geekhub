@@ -51,7 +51,7 @@ class Manager extends Model
 
         if (!$xml) return $data;
 
-        while ($xml->read() && $xml->name !== 'manager');
+        while ($xml->read() && $xml->name !== 'manager') ;
 
         while ($xml->name === 'manager') {
 
@@ -137,6 +137,27 @@ class Manager extends Model
         return true;
     }
 
+    public function remove($id)
+    {
+        if (!$id) return false;
+
+        $developer = $id;
+        $dom = $this->getDomDocument();
+
+        if (!$dom) return false;
+
+        $xpath = new \DOMXpath($dom);
+        $nodeList = $xpath->query("/managers/manager[@id={$developer}]");
+
+        $oldNode = $nodeList->item(0);
+
+        $oldNode->parentNode->removeChild($oldNode);
+
+        $this->saveXML($dom->saveXML());
+
+        return true;
+    }
+
     public function validateFields($data)
     {
         $validator = Validation::createValidator();
@@ -173,7 +194,14 @@ class Manager extends Model
         $violations = $validator->validateValue($data, $constraint);
 
         if ($violations->has(0)) {
-            return $violations->get(0)->getMessage();
+
+            $errors = array();
+
+            foreach ($violations as $violation) {
+                $errors[] = $violation->getMessage();
+            }
+
+            return $errors;
         }
 
         return true;

@@ -105,6 +105,8 @@ class Developer extends Model
 
     public function save($data)
     {
+        if (empty($data) || !is_array($data)) return false;
+
         $developer = $data['id'];
         $parent = new \DomDocument;
         $parentNode = $parent->createElement('developer');
@@ -135,6 +137,27 @@ class Developer extends Model
         $newNode = $dom->importNode($parent->documentElement, true);
 
         $oldNode->parentNode->replaceChild($newNode, $oldNode);
+
+        $this->saveXML($dom->saveXML());
+
+        return true;
+    }
+
+    public function remove($id)
+    {
+        if (!$id) return false;
+
+        $developer = $id;
+        $dom = $this->getDomDocument();
+
+        if (!$dom) return false;
+
+        $xpath = new \DOMXpath($dom);
+        $nodeList = $xpath->query("/developers/developer[@id={$developer}]");
+
+        $oldNode = $nodeList->item(0);
+
+        $oldNode->parentNode->removeChild($oldNode);
 
         $this->saveXML($dom->saveXML());
 
@@ -181,7 +204,14 @@ class Developer extends Model
         $violations = $validator->validateValue($data, $constraint);
 
         if ($violations->has(0)) {
-            return $violations->get(0)->getMessage();
+
+            $errors = array();
+
+            foreach ($violations as $violation) {
+                $errors[] = $violation->getMessage();
+            }
+
+            return $errors;
         }
 
         return true;

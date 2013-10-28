@@ -4,8 +4,14 @@
         <h1>Not found</h1>
     <?php else: ?>
         <h1>Edit developer "<?= $view_edit['name']; ?>"</h1>
-        <?php if (isset($view_error)): ?>
-            <p class="error"><?= $view_error ?></p>
+        <?php if (isset($view_errors)): ?>
+            <?php if (is_array($view_errors)): ?>
+                <?php foreach ($view_errors as $view_error): ?>
+                    <p class="error"><?= $view_error ?></p>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="error"><?= $view_errors ?></p>
+            <?php endif; ?>
         <?php endif; ?>
         <form method="post" action="/oop/index.php?r=developer/update&id=<?= $view_edit['id']; ?>">
             <input type="hidden" value="<?= $view_edit['id']; ?>" name="id">

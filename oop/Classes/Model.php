@@ -56,5 +56,7 @@ abstract class Model
 
     abstract public function save($data);
 
+    abstract public function remove($id);
+
     abstract public function validateFields($data);
 }
