@@ -24,6 +24,8 @@ class Developer extends Controller
 
         if (isset($delete)) $data['delete'] = $delete;
 
+        if ($request->query->get('create')) $data['create'] = 1;
+
         $this->render('index', $data);
     }
 
@@ -43,7 +45,7 @@ class Developer extends Controller
 
             if ($result === true && $model->save($postData)) {
 
-                $this->redirect('index', array('update' => 1));
+                $this->redirect('index', array('update' => true));
 
             } else {
 
@@ -78,6 +80,35 @@ class Developer extends Controller
 
     public function actionCreate()
     {
+        $model = new \Classes\Models\Developer($this->object);
 
+        $request = Request::createFromGlobals();
+
+        $data = array('title' => 'Create Developer');
+
+        if ($request->getMethod() === 'POST') {
+
+            $postData = $model->getAttributes($request);
+
+            $result = $model->validateFields($postData);
+
+            if ($result === true && $model->create($postData)) {
+
+                $this->redirect('index', array('create' => true));
+
+            } else {
+
+                $data['create'] = $request->request->all();
+                $data['errors'] = $result;
+
+            }
+
+        } elseif ($request->getMethod() === 'GET') {
+
+            $data['create'] = array('id' => time());
+
+        }
+
+        $this->render('create', $data);
     }
 }

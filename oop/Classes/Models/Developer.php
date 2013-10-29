@@ -15,13 +15,15 @@ class Developer extends Model
 
         if (!$id) return $data;
 
-        $xml = $this->getXMLReader();
+        $container = 'developer';
+
+        $xml = $this->getXMLReader($container);
 
         if (!$xml) return $data;
 
-        while ($xml->read() && $xml->name !== 'developer') ;
+        while ($xml->read() && $xml->name !== $container) ;
 
-        while ($xml->name === 'developer') {
+        while ($xml->name === $container) {
 
             if ($xml->getAttribute("id") == $id) {
                 $node = new \SimpleXMLElement($xml->readOuterXML());
@@ -36,7 +38,7 @@ class Developer extends Model
                 break;
             }
 
-            $xml->next('developer');
+            $xml->next($container);
         }
 
         return $data;
@@ -44,15 +46,17 @@ class Developer extends Model
 
     public function loadAllModels()
     {
-        $xml = $this->getXMLReader();
+        $container = 'developer';
+
+        $xml = $this->getXMLReader($container);
 
         $data = array();
 
         if (!$xml) return $data;
 
-        while ($xml->read() && $xml->name !== 'developer') ;
+        while ($xml->read() && $xml->name !== $container) ;
 
-        while ($xml->name === 'developer') {
+        while ($xml->name === $container) {
 
             $node = new \SimpleXMLElement($xml->readOuterXML());
             $data [] = array(
@@ -60,7 +64,7 @@ class Developer extends Model
                 'name' => $node->name
             );
 
-            $xml->next('developer');
+            $xml->next($container);
         }
 
         return $data;
@@ -101,6 +105,40 @@ class Developer extends Model
         }
 
         return $data;
+    }
+
+    public function create($data)
+    {
+        if (empty($data) || !is_array($data)) return false;
+
+        $container = 'developer';
+
+        $xmlContent = $this->getXMLReader($container, false);
+
+        if (!$xmlContent) {
+            $xmlWriter = new \XMLWriter();
+            $xmlWriter->openMemory();
+            $xmlWriter->startDocument();
+            $xmlWriter->startElement($container . 's');
+            $xmlWriter->endElement();
+            $xmlContent = $xmlWriter->outputMemory();
+        }
+
+        $xml = new \SimpleXMLElement($xmlContent);
+
+        $newChild = $xml->addChild($container);
+
+        $newChild->addAttribute("id", $data['id']);
+        $newChild->addChild('id', $data['id']);
+        $newChild->addChild('name', $data['name']);
+        $newChild->addChild('pay', $data['pay']);
+        $newChild->addChild('bonus', $data['bonus']);
+        $newChild->addChild('project', $data['project']);
+        $newChild->addChild('technologies', $data['technologies']);
+
+        $this->saveXML($xml->asXML());
+
+        return true;
     }
 
     public function save($data)

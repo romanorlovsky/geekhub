@@ -10,6 +10,9 @@
             <p>Manager remove error</p>
         <?php endif; ?>
     <?php endif; ?>
+    <?php if (isset($view_create)): ?>
+        <p>Manager create successfully</p>
+    <?php endif; ?>
     <ul class="<?= $view_controller ?>-list">
         <?php if (!empty($view_list)): ?>
             <?php foreach ($view_list as $item): ?>
@@ -21,4 +24,5 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </ul>
+    <a href="/oop/index.php?r=<?= $view_controller ?>/create">Create</a>
 </div>

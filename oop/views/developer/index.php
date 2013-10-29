@@ -1,6 +1,6 @@
 <div class="<?= $view_controller ?>">
     <h1>Developers</h1>
-    <?php if(isset($view_update)): ?>
+    <?php if (isset($view_update)): ?>
         <p>Developer update successfully</p>
     <?php endif; ?>
     <?php if (isset($view_remove)): ?>
@@ -9,6 +9,9 @@
         <?php else: ?>
             <p>Developer remove error</p>
         <?php endif; ?>
+    <?php endif; ?>
+    <?php if (isset($view_create)): ?>
+        <p>Developer create successfully</p>
     <?php endif; ?>
     <ul class="<?= $view_controller ?>-list">
         <?php if (!empty($view_list)): ?>
@@ -21,4 +24,5 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </ul>
+    <a href="/oop/index.php?r=<?= $view_controller ?>/create">Create</a>
 </div>

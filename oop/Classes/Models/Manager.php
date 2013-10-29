@@ -15,15 +15,17 @@ class Manager extends Model
 
         if (!$id) return $data;
 
-        $xml = $this->getXMLReader();
+        $container = 'manager';
+
+        $xml = $this->getXMLReader($container);
 
         $data = array();
 
         if (!$xml) return $data;
 
-        while ($xml->read() && $xml->name !== 'manager') ;
+        while ($xml->read() && $xml->name !== $container) ;
 
-        while ($xml->name === 'manager') {
+        while ($xml->name === $container) {
 
             if ($xml->getAttribute("id") == $id) {
                 $node = new \SimpleXMLElement($xml->readOuterXML());
@@ -37,7 +39,7 @@ class Manager extends Model
                 break;
             }
 
-            $xml->next('manager');
+            $xml->next($container);
         }
 
         return $data;
@@ -45,15 +47,17 @@ class Manager extends Model
 
     public function loadAllModels()
     {
-        $xml = $this->getXMLReader();
+        $container = 'manager';
+
+        $xml = $this->getXMLReader($container);
 
         $data = array();
 
         if (!$xml) return $data;
 
-        while ($xml->read() && $xml->name !== 'manager') ;
+        while ($xml->read() && $xml->name !== $container) ;
 
-        while ($xml->name === 'manager') {
+        while ($xml->name === $container) {
 
             $node = new \SimpleXMLElement($xml->readOuterXML());
             $data [] = array(
@@ -61,7 +65,7 @@ class Manager extends Model
                 'name' => $node->name
             );
 
-            $xml->next('manager');
+            $xml->next($container);
         }
 
         return $data;
@@ -98,6 +102,39 @@ class Manager extends Model
         }
 
         return $data;
+    }
+
+    public function create($data)
+    {
+        if (empty($data) || !is_array($data)) return false;
+
+        $container = 'manager';
+
+        $xmlContent = $this->getXMLReader($container, false);
+
+        if (!$xmlContent) {
+            $xmlWriter = new \XMLWriter();
+            $xmlWriter->openMemory();
+            $xmlWriter->startDocument();
+            $xmlWriter->startElement($container . 's');
+            $xmlWriter->endElement();
+            $xmlContent = $xmlWriter->outputMemory();
+        }
+
+        $xml = new \SimpleXMLElement($xmlContent);
+
+        $newChild = $xml->addChild($container);
+
+        $newChild->addAttribute("id", $data['id']);
+        $newChild->addChild('id', $data['id']);
+        $newChild->addChild('name', $data['name']);
+        $newChild->addChild('pay', $data['pay']);
+        $newChild->addChild('bonus', $data['bonus']);
+        $newChild->addChild('projects', $data['projects']);
+
+        $this->saveXML($xml->asXML());
+
+        return true;
     }
 
     public function save($data)
@@ -141,13 +178,13 @@ class Manager extends Model
     {
         if (!$id) return false;
 
-        $developer = $id;
+        $manager = $id;
         $dom = $this->getDomDocument();
 
         if (!$dom) return false;
 
         $xpath = new \DOMXpath($dom);
-        $nodeList = $xpath->query("/managers/manager[@id={$developer}]");
+        $nodeList = $xpath->query("/managers/manager[@id={$manager}]");
 
         $oldNode = $nodeList->item(0);
 
@@ -164,13 +201,13 @@ class Manager extends Model
 
         $constraint = new Assert\Collection(array(
             'id' => new Assert\Type(array(
-                'type' => 'numeric',
-                'message' => '"ID" should be of type {{ type }}.'
-            )),
+                    'type' => 'numeric',
+                    'message' => '"ID" should be of type {{ type }}.'
+                )),
             'name' => new Assert\Length(array(
-                'min' => 3,
-                'minMessage' => '"Name" is too short. It should have {{ limit }} characters or more.'
-            )),
+                    'min' => 3,
+                    'minMessage' => '"Name" is too short. It should have {{ limit }} characters or more.'
+                )),
             'pay' => array(
 //                new Assert\Required(array('message'=>'xxx')),
                 new Assert\Type(array(
@@ -186,9 +223,9 @@ class Manager extends Model
                 ))
             ),
             'projects' => new Assert\Type(array(
-                'type' => 'numeric',
-                'message' => '"Projects" should be of type numeric.'
-            ))
+                    'type' => 'numeric',
+                    'message' => '"Projects" should be of type numeric.'
+                ))
         ));
 
         $violations = $validator->validateValue($data, $constraint);

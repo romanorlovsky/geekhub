@@ -13,22 +13,28 @@ abstract class Model
         $this->dbFile = realpath(dirname(__FILE__) . "/../database") . '/' . $object . '.xml';
     }
 
-    public function getXMLReader()
+    public function getXMLReader($container, $xml = true)
     {
         if (!file_exists($this->dbFile)) {
             $this->dbFile = realpath(dirname(__FILE__) . "/../database") . '/' . $this->object . '.xml';
 
-            $xml = new \XMLWriter();
-            $xml->openMemory();
-            $xml->startDocument();
+            $xmlWriter = new \XMLWriter();
+            $xmlWriter->openMemory();
+            $xmlWriter->startDocument();
+            $xmlWriter->startElement($container . 's');
+            $xmlWriter->endElement();
 
-            $this->saveXML($xml->outputMemory());
+            $this->saveXML($xmlWriter->outputMemory());
         }
 
-        $xml = new \XMLReader();
-        $xml->xml(file_get_contents($this->dbFile));
+        if ($xml) {
+            $xml = new \XMLReader();
+            $xml->xml(file_get_contents($this->dbFile));
 
-        return $xml;
+            return $xml;
+        }
+
+        return file_get_contents($this->dbFile);
     }
 
     public function getDomDocument()
