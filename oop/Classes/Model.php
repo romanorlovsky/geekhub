@@ -47,16 +47,4 @@ abstract class Model
         fwrite($fp, $data);
         fclose($fp);
     }
-
-    abstract public function loadModel($id);
-
-    abstract public function loadAllModels();
-
-    abstract public function getAttributes($request);
-
-    abstract public function save($data);
-
-    abstract public function remove($id);
-
-    abstract public function validateFields($data);
 }

@@ -16,7 +16,7 @@
                 <li>
                     <span><?= $item['name']; ?></span>
                     <a href="/oop/index.php?r=<?= $view_controller ?>/update&id=<?= $item['id'] ?>">Edit</a>
-                    <a href="/oop/index.php?r=<?= $view_controller ?>/remove&id=<?= $item['id'] ?>" onclick="if(!confirm('Are you sure?')) return false;">Remove</a>
+                    <a href="/oop/index.php?r=<?= $view_controller ?>/delete&id=<?= $item['id'] ?>" onclick="if(!confirm('Are you sure?')) return false;">Remove</a>
                 </li>
             <?php endforeach; ?>
         <?php endif; ?>

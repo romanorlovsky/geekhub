@@ -20,9 +20,9 @@ class Developer extends Controller
 
         if ($request->query->get('update')) $data['update'] = 1;
 
-        $remove = $request->query->get('remove');
+        $delete = $request->query->get('delete');
 
-        if (isset($remove)) $data['remove'] = $remove;
+        if (isset($delete)) $data['delete'] = $delete;
 
         $this->render('index', $data);
     }
@@ -63,7 +63,7 @@ class Developer extends Controller
         $this->render('edit', $data);
     }
 
-    public function actionRemove()
+    public function actionDelete()
     {
         $model = new \Classes\Models\Developer($this->object);
 
@@ -71,8 +71,13 @@ class Developer extends Controller
 
         $id = $request->query->get('id');
 
-        $remove = $model->remove($id);
+        $delete = $model->remove($id);
 
-        $this->redirect('index', array('remove' => $remove));
+        $this->redirect('index', array('delete' => $delete));
+    }
+
+    public function actionCreate()
+    {
+
     }
 }
