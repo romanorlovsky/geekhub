@@ -165,24 +165,24 @@ class Manager extends Model
         $constraint = new Assert\Collection(array(
             'id' => new Assert\Type(array(
                 'type' => 'numeric',
-                'message' => '"ID" should be of type numeric.'
+                'message' => '"ID" should be of type {{ type }}.'
             )),
             'name' => new Assert\Length(array(
                 'min' => 3,
-//                'message' => '"Name" is too short. It should have 3 characters or more.'
+                'minMessage' => '"Name" is too short. It should have {{ limit }} characters or more.'
             )),
             'pay' => array(
 //                new Assert\Required(array('message'=>'xxx')),
                 new Assert\Type(array(
                     'type' => 'numeric',
-                    'message' => '"Pay" should be of type numeric.'
+                    'message' => '"Pay" should be of type {{ type }}.'
                 ))
             ),
             'bonus' => array(
 //                new Assert\Blank(),
                 new Assert\Type(array(
                     'type' => 'numeric',
-                    'message' => '"Bonus" should be of type numeric.'
+                    'message' => '"Bonus" should be of type {{ type }}.'
                 ))
             ),
             'projects' => new Assert\Type(array(

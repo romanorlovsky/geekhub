@@ -170,35 +170,35 @@ class Developer extends Model
 
         $constraint = new Assert\Collection(array(
             'id' => new Assert\Type(array(
-                'type' => 'numeric',
-                'message' => '"ID" should be of type numeric.'
-            )),
+                    'type' => 'numeric',
+                    'message' => '"ID" should be of type {{ type }}.'
+                )),
             'name' => new Assert\Length(array(
-                'min' => 3,
-//                'message' => '"Name" is too short. It should have 3 characters or more.'
-            )),
+                    'min' => 3,
+                    'minMessage' => '"Name" is too short. It should have {{ limit }} characters or more.'
+                )),
             'pay' => array(
 //                new Assert\Required(array('message'=>'xxx')),
                 new Assert\Type(array(
                     'type' => 'numeric',
-                    'message' => '"Pay" should be of type numeric.'
+                    'message' => '"Pay" should be of type {{ type }}.'
                 ))
             ),
             'bonus' => array(
 //                new Assert\Blank(),
                 new Assert\Type(array(
                     'type' => 'numeric',
-                    'message' => '"Bonus" should be of type numeric.'
+                    'message' => '"Bonus" should be of type {{ type }}.'
                 ))
             ),
             'project' => new Assert\Length(array(
-                'min' => 2,
-//                'message' => '"Project" is too short. It should have 2 characters or more.'
-            )),
+                    'min' => 2,
+                    'minMessage' => '"Project" is too short. It should have {{ limit }} characters or more.'
+                )),
             'technologies' => new Assert\Length(array(
-                'min' => 2,
-//                'message' => '"Technologies" is too short. It should have 3 characters or more.'
-            ))
+                    'min' => 2,
+                    'minMessage' => '"Technologies" is too short. It should have {{ limit }} characters or more.'
+                ))
         ));
 
         $violations = $validator->validateValue($data, $constraint);
