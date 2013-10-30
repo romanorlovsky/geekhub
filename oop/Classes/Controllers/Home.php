@@ -2,7 +2,7 @@
 
 namespace Classes\Controllers;
 
-use Classes\Controller;
+use Classes\Abstracts\Controller;
 
 class Home extends Controller
 {

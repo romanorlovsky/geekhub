@@ -4,7 +4,8 @@
             "Classes\\": "",
             "Classes\\Controller\\": "Classes/Controller/",
             "Classes\\Model\\": "Classes/Model/",
-            "Classes\\Validators\\": "Classes/Validators/"
+            "Classes\\Validators\\": "Classes/Validators/",
+            "Classes\\Abstracts\\": "Classes/Abstracts/"
         }
     },
     "require": {

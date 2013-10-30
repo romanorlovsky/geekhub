@@ -1,6 +1,6 @@
 <?php
 
-namespace Classes;
+namespace Classes\Abstracts;
 
 abstract class Model
 {
@@ -10,13 +10,13 @@ abstract class Model
     public function __construct($object)
     {
         $this->object = $object;
-        $this->dbFile = realpath(dirname(__FILE__) . "/../database") . '/' . $object . '.xml';
+        $this->dbFile = realpath(dirname(__FILE__) . "/../../database") . '/' . $object . '.xml';
     }
 
     public function getXMLReader($container, $xml = true)
     {
         if (!file_exists($this->dbFile)) {
-            $this->dbFile = realpath(dirname(__FILE__) . "/../database") . '/' . $this->object . '.xml';
+            $this->dbFile = realpath(dirname(__FILE__) . "/../../database") . '/' . $this->object . '.xml';
 
             $xmlWriter = new \XMLWriter();
             $xmlWriter->openMemory();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Classes;
+namespace Classes\Abstracts;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -22,7 +22,7 @@ abstract class Controller
 
         if (!empty($data) && is_array($data)) extract($data, EXTR_PREFIX_ALL, 'view');
 
-        $viewsRoot = realpath(dirname(__FILE__) . "/../views") . '/';
+        $viewsRoot = realpath(dirname(__FILE__) . "/../../views") . '/';
 
         $layoutDir = $viewsRoot . 'layout/';
 
@@ -52,7 +52,7 @@ abstract class Controller
 
         if (!empty($params) && is_array($params)) extract($params, EXTR_PREFIX_ALL, 'params');
 
-        $viewPath = realpath(dirname(__FILE__) . "/../views") . '/' . $this->object . '/_' . $partial . '.php';
+        $viewPath = realpath(dirname(__FILE__) . "/../../views") . '/' . $this->object . '/_' . $partial . '.php';
 
         if (file_exists($viewPath)) include $viewPath;
     }

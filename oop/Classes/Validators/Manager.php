@@ -12,30 +12,42 @@ class Manager
         $validator = Validation::createValidator();
 
         $constraint = new Assert\Collection(array(
-            'id' => new Assert\Type(array(
-                    'type' => 'numeric',
-                    'message' => '"ID" should be of type {{ type }}.'
-                )),
-            'name' => new Assert\Length(array(
-                    'min' => 3,
-                    'minMessage' => '"Name" is too short. It should have {{ limit }} characters or more.'
-                )),
-            'pay' => array(
-                new Assert\Type(array(
-                    'type' => 'numeric',
-                    'message' => '"Pay" should be of type {{ type }}.'
-                ))
+            'fields' => array(
+                'id' => new Assert\Required(array(
+                        new Assert\Type(array(
+                            'type' => 'numeric',
+                            'message' => '"ID" should be of type {{ type }}.'
+                        ))
+                    )),
+                'name' => new Assert\Required(array(
+                        new Assert\Length(array(
+                            'min' => 3,
+                            'minMessage' => '"Name" is too short. It should have {{ limit }} characters or more.'
+                        ))
+                    )),
+                'pay' => array(
+                    new Assert\Required(array(
+                        new Assert\Type(array(
+                            'type' => 'numeric',
+                            'message' => '"Pay" should be of type {{ type }}.'
+                        ))
+                    ))
+                ),
+                'bonus' => new Assert\Optional(array(
+                            new Assert\Type(array(
+                                'type' => 'numeric',
+                                'message' => '"Bonus" should be of type {{ type }}.'
+                            ))
+                        )
+                    ),
+                'projects' => new Assert\Required(array(
+                        new Assert\Length(array(
+                            'min' => 2,
+                            'minMessage' => '"Projects" should be of type numeric.'
+                        ))
+                    ))
             ),
-            'bonus' => array(
-                new Assert\Type(array(
-                    'type' => 'numeric',
-                    'message' => '"Bonus" should be of type {{ type }}.'
-                ))
-            ),
-            'projects' => new Assert\Type(array(
-                    'type' => 'numeric',
-                    'message' => '"Projects" should be of type numeric.'
-                ))
+            'missingFieldsMessage' => "\"{{ field }}\" is missing"
         ));
 
         $violations = $validator->validateValue($data, $constraint);

@@ -2,7 +2,7 @@
 
 namespace Classes\Models;
 
-use Classes\Model;
+use Classes\Abstracts\Model;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints as Assert;
