@@ -3,8 +3,8 @@
 namespace Classes\Controllers;
 
 use Classes\Controller;
+use Classes\Validators;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class Manager extends Controller
 {
@@ -42,16 +42,18 @@ class Manager extends Controller
 
             $postData = $model->getAttributes($request);
 
-            $result = $model->validateFields($postData);
+            $validator = new Validators\Manager();
 
-            if ($result === true && $model->save($postData)) {
+            $validation = $validator->validateFields($postData);
+
+            if ($validation === true && $model->save($postData)) {
 
                 $this->redirect('index', array('update' => true));
 
             } else {
 
                 $data['edit'] = $request->request->all();
-                $data['errors'] = $result;
+                $data['errors'] = $validation;
 
             }
 
@@ -91,16 +93,18 @@ class Manager extends Controller
 
             $postData = $model->getAttributes($request);
 
-            $result = $model->validateFields($postData);
+            $validator = new Validators\Manager();
 
-            if ($result === true && $model->create($postData)) {
+            $validation = $validator->validateFields($postData);
+
+            if ($validation === true && $model->create($postData)) {
 
                 $this->redirect('index', array('create' => true));
 
             } else {
 
                 $data['create'] = $request->request->all();
-                $data['errors'] = $result;
+                $data['errors'] = $validation;
 
             }
 

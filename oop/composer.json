@@ -3,7 +3,8 @@
         "psr-0": {
             "Classes\\": "",
             "Classes\\Controller\\": "Classes/Controller/",
-            "Classes\\Model\\": "Classes/Model/"
+            "Classes\\Model\\": "Classes/Model/",
+            "Classes\\Validators\\": "Classes/Validators/"
         }
     },
     "require": {
