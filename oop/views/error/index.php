@@ -1,3 +1,3 @@
-<div class="<?=$view_controller?>">
+<div class="<?php echo$view_controller?>">
     <h1>Page not found</h1>
 </div>
